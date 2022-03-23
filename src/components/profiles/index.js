@@ -1,4 +1,6 @@
 import React from "react";
+import { Img, Name, Block } from "../wraps";
+import { Col, Row } from 'react-bootstrap';
 
 export default class FetchStudent extends React.Component {
   state = {
@@ -25,13 +27,20 @@ export default class FetchStudent extends React.Component {
     return (
       <div>
         {this.state.list.map(profile => (
-          <div key={profile.id}>
-            <div>{profile.firstName} {profile.lastName}</div>
-            <div>{profile.company}</div>
-            <div>{profile.email}</div>
-            <img src={profile.pic} alt=""/>
-            <div>{profile.grades.reduce((a, b) => a + parseInt(b), 0) / profile.grades.length}%</div>
-          </div>
+          <Block key={profile.id}>
+            <Row>
+              <Col xs lg="2">
+                <Img source={profile.pic}/>
+              </Col>
+              <Col md="auto">
+              <Name>{profile.firstName} {profile.lastName}</Name>
+              <Row >{profile.email}</Row>
+              <Row>{profile.company}</Row>
+              <Row>{profile.skill}</Row>
+              <Row>{profile.grades.reduce((a, b) => a + parseInt(b), 0) / profile.grades.length}%</Row>
+              </Col>
+            </Row>
+          </Block>
         ))}
       </div>
     );
